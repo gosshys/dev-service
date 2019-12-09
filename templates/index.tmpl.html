@@ -89,7 +89,6 @@ body {}
 </div>
 <script>
 $(function() {
-  console.log('aaa');
   var now_jpn = moment();
   function show () {
     $('#ou').val(now_jpn.unix());
@@ -119,9 +118,7 @@ $(function() {
         return;
       }
     }
-    console.log(val);
     now_jpn = moment(val);
-    console.log(now_jpn);
     show();
   });
 });
