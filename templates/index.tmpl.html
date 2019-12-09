@@ -21,10 +21,10 @@ body {}
 .cp_iptxt {
 	position: relative;
 	width: 70%;
-        margin: 0 auto;
+        margin: 30px auto;
 }
 .cp_iptxt input[type='text'] {
-	font: 15px/40px sans-serif;
+	font: 15px/36px sans-serif;
 	box-sizing: border-box;
 	width: 100%;
 	padding: 0.3em;
@@ -42,27 +42,29 @@ body {}
 .out {
 	position: relative;
 	width: 70%;
-        margin: 20 auto;
+        margin: 20px auto;
 }
 .out input[type='text'] {
-	font: 15px/24px sans-serif;
+	font: 15px/36px sans-serif;
 	width: 100%;
 	padding: 0.3em;
 	transition: 0.3s;
 	letter-spacing: 1px;
 	border: none;
-	border-bottom: 2px solid #999999;
+	/* border-bottom: 2px solid #999999; */
 }
-#ou2 {
-	font: 15px/24px sans-serif;
-	box-sizing: border-box;
-	width: 100%;
-	padding: 0.3em;
-	transition: 0.3s;
-	letter-spacing: 1px;
-	color: #aaaaaa;
-	border: none;
-	border-bottom: 1px solid #999999;
+table {
+  width: 100%;
+}
+.col1 {
+  padding: 0 5px;
+  border: none;
+  border-bottom: 2px solid #999999;
+}
+.col2 {
+  padding: 0 5px;
+  border: none;
+  border-bottom: 2px solid #999999;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -77,49 +79,74 @@ body {}
 <p>UNIX時間と日本標準時を相互変換します</P>
 <div class="cp_iptxt">
 <label class="ef">
-<input type="text" id="it" placeholder="unixtimeか時間のどちらかを入力してください">
-</label>
+<input type="text" id="it" placeholder="unixtimeか時間のどちらかを入力してください ex) 1575891619">
 </div>
 <div class="out">
-<input type="text" id="ou"></br>
-<input type="text" id="oj"></br>
-</label>
+<table>
+<tr>
+<td class="col1">unixtime</td>
+<td class="col2"><input type="text" id="ou"></td>
+</tr>
+<tr>
+<td class="col1">ISO 8601</td>
+<td class="col2"><input type="text" id="oj"></td>
+</tr>
+<tr>
+<td class="col1">RFC 2822</td>
+<td class="col2"><input type="text" id="or"></td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <script>
 $(function() {
-  var now_jpn = moment();
-  function show () {
-    $('#ou').val(now_jpn.unix());
-    $('#oj').val(now_jpn.format());
+  function show(val) {
+    $('#ou').val(val.unix());
+    $('#oj').val(val.format());
+    $('#or').val(val);
   }
-  show();
+  function convert(val) {
+    if(!val) return null;
+    var m = null;
+    if(val.length==10){
+      m = moment(val+"000", "x");
+    } else if(val.length==13){
+      m = moment(val, "X");
+    } else {
+      m = moment(val);
+    }
+    if(!m.isValid()) return null;
+    return m;
+  }
+
+  show(moment());
 
   $('#it').change(function() {
+    var m = convert($(this).val());
+    if (!m) return;
+    show(m);
+  });
+  $('#ou').change(function() {
     var val = $(this).val();
-    if(!val) {
-      return;
-    }
-    if(val.length==10){
-      var um = moment(val+"000", "x");
-      if(!um) return;
-      now_jpn = um;
-      show();
-      return;
-    } else if(val.length==13){
-      var um = moment(val, "X");
-      if(!um) return;
-      now_jpn = um;
-      show();
-      return;
-    } else {
-      if(!moment(val).isValid()) {
-        return;
-      }
-    }
-    now_jpn = moment(val);
-    show();
+    var m = convert(val);
+    if(!m) return;
+    $('#it').val(val);
+    show(m);
+  });
+  $('#oj').change(function() {
+    var val = $(this).val();
+    var m = convert(val);
+    if(!m) return;
+    $('#it').val(val);
+    show(m);
+  });
+  $('#or').change(function() {
+    var val = $(this).val();
+    var m = convert(val);
+    if(!m) return;
+    $('#it').val(val);
+    show(m);
   });
 });
 </script>
