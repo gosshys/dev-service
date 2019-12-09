@@ -51,7 +51,6 @@ body {}
 	transition: 0.3s;
 	letter-spacing: 1px;
 	border: none;
-	/* border-bottom: 2px solid #999999; */
 }
 table {
   width: 100%;
@@ -102,51 +101,35 @@ table {
 <script>
 $(function() {
   function show(val) {
-    $('#ou').val(val.unix());
-    $('#oj').val(val.format());
-    $('#or').val(val);
-  }
-  function convert(val) {
-    if(!val) return null;
+    if(!val) return;
     var m = null;
     if(val.length==10){
       m = moment(val+"000", "x");
     } else if(val.length==13){
-      m = moment(val, "X");
+      m = moment(val, "x");
     } else {
       m = moment(val);
     }
-    if(!m.isValid()) return null;
-    return m;
+    if(!m.isValid()) return;
+    $('#it').val(val);
+    $('#ou').val(m.unix());
+    $('#oj').val(m.format());
+    $('#or').val(m);
   }
 
-  show(moment());
+  show(moment().unix().toString());
 
   $('#it').change(function() {
-    var m = convert($(this).val());
-    if (!m) return;
-    show(m);
+    show($(this).val());
   });
   $('#ou').change(function() {
-    var val = $(this).val();
-    var m = convert(val);
-    if(!m) return;
-    $('#it').val(val);
-    show(m);
+    show($(this).val());
   });
   $('#oj').change(function() {
-    var val = $(this).val();
-    var m = convert(val);
-    if(!m) return;
-    $('#it').val(val);
-    show(m);
+    show($(this).val());
   });
   $('#or').change(function() {
-    var val = $(this).val();
-    var m = convert(val);
-    if(!m) return;
-    $('#it').val(val);
-    show(m);
+    show($(this).val());
   });
 });
 </script>
