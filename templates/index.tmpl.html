@@ -56,7 +56,7 @@
 
     .out input[type='text'] {
       font: 15px/36px sans-serif;
-      width: 100%;
+      width: 80%;
       padding: 0.3em;
       transition: 0.3s;
       letter-spacing: 1px;
@@ -75,6 +75,18 @@
 
     .col2 {
       padding: 0 5px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .col4 {
+      padding: 0 10px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .col5 {
+      padding: 0 10px;
       border: none;
       border-bottom: 2px solid #999999;
     }
@@ -103,6 +115,11 @@
     footer .contents {
       margin: auto;
       text-align: center;
+    }
+
+    .detail {
+      font-size: 11px;
+      color: #999999;
     }
 
     a:link {
@@ -154,6 +171,15 @@
             <td class="col2"><input type="text" id="or"></td>
           </tr>
         </table>
+        <h4>現在時刻との差</h4>
+        <table>
+          <tr>
+            <td class="col4"><input type="text" id="dh" style="text-align: right;">時間</td>
+            <td class="col4"><input type="text" id="dm" style="text-align: right;">分</td>
+            <td class="col4"><input type="text" id="ds" style="text-align: right;">秒</td>
+          </tr>
+        </table>
+        <p class="detail">※ 単位未満は切り捨てになっています。</p>
       </div>
       <div class="cli">
         <h2>CLI</h2>
@@ -176,7 +202,7 @@
   </footer>
   <script>
     $(function () {
-      function show(val) {
+      function show(val, now) {
         if (!val) return;
         var m = null;
         if (val.length == 10) {
@@ -193,21 +219,44 @@
         $('#ou').val(m.unix());
         $('#oj').val(m.format());
         $('#or').val(m);
+
+        // diff
+        $('#dh').val(m.diff(now, 'hours'))
+        $('#dm').val(m.diff(now, 'minutes'))
+        $('#ds').val(m.diff(now, 'seconds'))
+      }
+
+      function diffChange(val, mode) {
+        var diff = moment();
+        var now = moment();
+        var num = Number(val);
+        var adj = 0;
+        if (num > 0) adj = 1;
+        show(String(diff.add(num, mode).unix()+adj), now);
       }
 
       show(moment().unix().toString());
 
       $('#it').change(function () {
-        show($(this).val());
+        show($(this).val(), moment());
       });
       $('#ou').change(function () {
-        show($(this).val());
+        show($(this).val(), moment());
       });
       $('#oj').change(function () {
-        show($(this).val());
+        show($(this).val(), moment());
       });
       $('#or').change(function () {
-        show($(this).val());
+        show($(this).val(), moment());
+      });
+      $('#dh').change(function () {
+        diffChange($(this).val(), 'hours')
+      });
+      $('#dm').change(function () {
+        diffChange($(this).val(), 'minutes')
+      });
+      $('#ds').change(function () {
+        diffChange($(this).val(), 'seconds')
       });
     });
   </script>
