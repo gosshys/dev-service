@@ -86,9 +86,9 @@
     }
 
     .cmd {
-      padding: 5px;
-      background-color: #C0C0C0;
-      border: 1px solid #C0C0C0;
+      padding: 8px;
+      background-color: #DDDDDD;
+      border: 1px solid #DDDDDD;
       border-radius: 10px;
     }
   </style>
@@ -129,11 +129,14 @@
       <div class="cli">
         <h2>CLI</h2>
         <p>macやlinuxのCLIでの変換方法はこちら</p>
-        <h3>Mac</h3>
-        <h4>unixtimeを求める</h4>
+        <h3>unixtimeを求める</h3>
+        <h4>Mac & Linux</h4>
         <div class="cmd">$ date +%s<br />1575948370</div>
-        <h4>unixtimeから日付形式に変換</h4>
+        <h3>unixtimeから日付形式に変換</h3>
+        <h4>Mac</h4>
         <div class="cmd">$ date -r 1575948370<br />2019年 12月10日 火曜日 12時26分10秒 JST</div>
+        <h4>Linux</h4>
+        <div class="cmd">$ date -d @1575948370<br />2019年 12月10日 火曜日 12時26分10秒 JST</div>
       </div>
     </div>
   </div>
