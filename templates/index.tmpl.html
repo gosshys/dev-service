@@ -1,137 +1,179 @@
 <html>
+
 <head>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-48562941-4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48562941-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'UA-48562941-4');
-</script>
-<title>unixtime変換サービス</title>
-<meta content="UNIX時間と日本標準時を相互変換します" name="description">
-<link rel="shortcut icon" href="static/favicon.png">
-<style>
-body {}
-.container {
-  width:60%;
-  margin: 0 auto;
-}
-.cp_iptxt {
-	position: relative;
-	width: 70%;
-        margin: 30px auto;
-}
-.cp_iptxt input[type='text'] {
-	font: 15px/36px sans-serif;
-	box-sizing: border-box;
-	width: 100%;
-	padding: 0.3em;
-	transition: 0.3s;
-	letter-spacing: 1px;
-	color: #aaaaaa;
-	border: none;
-	border-bottom: 2px solid #1b2538;
-	background: transparent;
-}
-.ef input[type='text']:focus {
-	border-bottom: 2px solid #999999;
-	outline: none;
-}
-.out {
-	position: relative;
-	width: 70%;
-        margin: 20px auto;
-}
-.out input[type='text'] {
-	font: 15px/36px sans-serif;
-	width: 100%;
-	padding: 0.3em;
-	transition: 0.3s;
-	letter-spacing: 1px;
-	border: none;
-}
-table {
-  width: 100%;
-}
-.col1 {
-  padding: 0 5px;
-  border: none;
-  border-bottom: 2px solid #999999;
-}
-.col2 {
-  padding: 0 5px;
-  border: none;
-  border-bottom: 2px solid #999999;
-}
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script>
-</head>
-<body>
-<div class="container">
-<h1>unixtime変換サービス</h1>
-<hr>
-<div>
-<p>UNIX時間と日本標準時を相互変換します</P>
-<div class="cp_iptxt">
-<label class="ef">
-<input type="text" id="it" placeholder="unixtimeか時間のどちらかを入力してください ex) 1575891619">
-</div>
-<div class="out">
-<table>
-<tr>
-<td class="col1">unixtime</td>
-<td class="col2"><input type="text" id="ou"></td>
-</tr>
-<tr>
-<td class="col1">ISO 8601</td>
-<td class="col2"><input type="text" id="oj"></td>
-</tr>
-<tr>
-<td class="col1">RFC 2822</td>
-<td class="col2"><input type="text" id="or"></td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<script>
-$(function() {
-  function show(val) {
-    if(!val) return;
-    var m = null;
-    if(val.length==10){
-      m = moment(val+"000", "x");
-    } else if(val.length==13){
-      m = moment(val, "x");
-    } else {
-      m = moment(val);
+    gtag('config', 'UA-48562941-4');
+  </script>
+  <title>unixtime変換サービス</title>
+  <meta content="UNIX時間と日本標準時を相互変換します" name="description">
+  <link rel="shortcut icon" href="static/favicon.png">
+  <style>
+    header {
+      width: 60%;
+      margin: 0 auto;
     }
-    if(!m.isValid()) return;
-    $('#it').val(val);
-    $('#ou').val(m.unix());
-    $('#oj').val(m.format());
-    $('#or').val(m);
-  }
 
-  show(moment().unix().toString());
+    .container {
+      width: 60%;
+      margin: 0 auto;
+    }
 
-  $('#it').change(function() {
-    show($(this).val());
-  });
-  $('#ou').change(function() {
-    show($(this).val());
-  });
-  $('#oj').change(function() {
-    show($(this).val());
-  });
-  $('#or').change(function() {
-    show($(this).val());
-  });
-});
-</script>
+    .input_form {
+      position: relative;
+      width: 70%;
+      margin: 30px auto;
+    }
+
+    .input_form input[type='text'] {
+      font: 15px/36px sans-serif;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0.3em;
+      transition: 0.3s;
+      letter-spacing: 1px;
+      color: #aaaaaa;
+      border: none;
+      border-bottom: 2px solid #1b2538;
+      background: transparent;
+    }
+
+    .ef input[type='text']:focus {
+      border-bottom: 2px solid #999999;
+      outline: none;
+    }
+
+    .out {
+      position: relative;
+      width: 70%;
+      margin: 20px auto;
+    }
+
+    .out input[type='text'] {
+      font: 15px/36px sans-serif;
+      width: 100%;
+      padding: 0.3em;
+      transition: 0.3s;
+      letter-spacing: 1px;
+      border: none;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    .col1 {
+      padding: 0 5px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .col2 {
+      padding: 0 5px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .cli {
+      position: relative;
+      width: 70%;
+      margin: 20px auto;
+    }
+
+    .cmd {
+      padding: 5px;
+      background-color: #C0C0C0;
+      border: 1px solid #C0C0C0;
+      border-radius: 10px;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>unixtime変換サービス</h1>
+    <hr />
+  </header>
+  <div class="container">
+    <div>
+      <p>UNIX時間と日本標準時を相互変換します。出力結果の値を変更してもそれぞれの日付が求められます。</P>
+      <div class="input_form">
+        <label class="ef">
+          <input type="text" id="it" placeholder="unixtimeか時間のどちらかを入力してください ex) 1575891619">
+      </div>
+      <div class="out">
+        <h2>output</h2>
+        <table>
+          <tr>
+            <td class="col1">unixtime</td>
+            <td class="col2"><input type="text" id="ou"></td>
+          </tr>
+          <tr>
+            <td class="col1">ISO 8601</td>
+            <td class="col2"><input type="text" id="oj"></td>
+          </tr>
+          <tr>
+            <td class="col1">RFC 2822</td>
+            <td class="col2"><input type="text" id="or"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="cli">
+        <h2>CLI</h2>
+        <p>macやlinuxのCLIでの変換方法はこちら</p>
+        <h3>Mac</h3>
+        <h4>unixtimeを求める</h4>
+        <div class="cmd">$ date +%s<br />1575948370</div>
+        <h4>unixtimeから日付形式に変換</h4>
+        <div class="cmd">$ date -r 1575948370<br />2019年 12月10日 火曜日 12時26分10秒 JST</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+      function show(val) {
+        if (!val) return;
+        var m = null;
+        if (val.length == 10) {
+          m = moment(val + "000", "x");
+        } else if (val.length == 13) {
+          m = moment(val, "x");
+        } else {
+          m = moment(val);
+        }
+        if (!m.isValid()) return;
+        if ($('#it').val()) {
+          $('#it').val(val);
+        }
+        $('#ou').val(m.unix());
+        $('#oj').val(m.format());
+        $('#or').val(m);
+      }
+
+      show(moment().unix().toString());
+
+      $('#it').change(function () {
+        show($(this).val());
+      });
+      $('#ou').change(function () {
+        show($(this).val());
+      });
+      $('#oj').change(function () {
+        show($(this).val());
+      });
+      $('#or').change(function () {
+        show($(this).val());
+      });
+    });
+  </script>
 </body>
+
 </html>
