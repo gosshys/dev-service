@@ -1,0 +1,97 @@
+<html>
+
+<head>
+  {{template "header.tmpl.html"}}
+  <title>バイト数変換サービス</title>
+  <meta content="バイト数をいろんな単位に変換します" name="description">  
+</head>
+
+<body>
+  <header>
+    <h1>バイト数変換サービス</h1>
+    <hr />
+  </header>
+  <div class="container">
+    <div>
+      <p>バイト数をキロ（キビ）、メガ（メビ）、ギガ（ギビ）の単位に変換します。変換後の値を直接変更してそれぞれの単位の数値を求めることもできます。</P>
+      <div class="input_form">
+        <label class="ef">
+          <input type="text" id="it" placeholder="バイト数を入力してください ex) 1024">
+      </div>
+      <div class="out">
+        <h2>output</h2>
+        <table>
+          <tr>
+            <td class="col1">byte</td>
+            <td class="col2"><input type="text" id="byte"></td>
+          </tr>
+          <tr>
+            <td class="col1">KB</td>
+            <td class="col2"><input type="text" id="kb"></td>
+          </tr>
+          <tr>
+            <td class="col1">KiB</td>
+            <td class="col2"><input type="text" id="kib"></td>
+          </tr>
+          <tr>
+            <td class="col1">MB</td>
+            <td class="col2"><input type="text" id="mb"></td>
+          </tr>
+          <tr>
+            <td class="col1">MiB</td>
+            <td class="col2"><input type="text" id="mib"></td>
+          </tr>
+          <tr>
+            <td class="col1">GB</td>
+            <td class="col2"><input type="text" id="gb"></td>
+          </tr>
+          <tr>
+            <td class="col1">GiB</td>
+            <td class="col2"><input type="text" id="gib"></td>
+          </tr>
+        </table>
+        <p class="detail">※ 単位未満は切り捨てになっています。</p>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="contents">
+      powered by <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/pow" target="_blank">Math.pow</a>
+    </div>
+  </footer>
+  <script>
+    $(function () {
+      function show(val) {
+        if (!val) return;
+        val = val.replace(/,/g, '');
+        if (isNaN(val)) return;
+
+        if ($('#it').val()) {
+          $('#it').val(val);
+        }
+        $('#byte').val(val);
+        $('#kb').val(Math.round((val / Math.pow(1000, 1)) * 1000) / 1000);
+        $('#kib').val(Math.round((val / Math.pow(1024, 1)) * 1000) / 1000);
+        $('#mb').val(Math.round((val / Math.pow(1000, 2)) * 1000) / 1000);
+        $('#mib').val(Math.round((val / Math.pow(1024, 2)) * 1000) / 1000);
+        $('#gb').val(Math.round((val / Math.pow(1000, 3)) * 1000) / 1000);
+        $('#gib').val(Math.round((val / Math.pow(1024, 3)) * 1000) / 1000);
+      }
+
+      $('#it').change(function () {
+        show($(this).val());
+      });
+      $('#byte').change(function () {
+        show($(this).val());
+      });
+      $('#kb').change(function () {
+        show($(this).val());
+      });
+      $('#kib').change(function () {
+        show($(this).val());
+      });
+    });
+  </script>
+</body>
+
+</html>
