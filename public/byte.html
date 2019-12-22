@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48562941-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-48562941-4');
+  </script>
+  <link rel="shortcut icon" href="./favicon.png">
+  <style>
+    header {
+      width: 60%;
+      margin: 0 auto;
+    }
+
+    .container {
+      width: 60%;
+      margin: 0 auto;
+    }
+
+    .input_form {
+      position: relative;
+      width: 70%;
+      margin: 30px auto;
+    }
+
+    .input_form input[type='text'] {
+      font: 15px/36px sans-serif;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0.3em;
+      transition: 0.3s;
+      letter-spacing: 1px;
+      color: #aaaaaa;
+      border: none;
+      border-bottom: 2px solid #1b2538;
+      background: transparent;
+    }
+
+    .ef input[type='text']:focus {
+      border-bottom: 2px solid #999999;
+      outline: none;
+    }
+
+    .out {
+      position: relative;
+      width: 70%;
+      margin: 20px auto;
+    }
+
+    .out input[type='text'] {
+      font: 15px/36px sans-serif;
+      width: 80%;
+      padding: 0.3em;
+      transition: 0.3s;
+      letter-spacing: 1px;
+      border: none;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    .col1 {
+      padding: 0 5px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .col2 {
+      padding: 0 5px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .col4 {
+      padding: 0 10px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .col5 {
+      padding: 0 10px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .cli {
+      position: relative;
+      width: 70%;
+      margin: 20px auto;
+    }
+
+    .cmd {
+      padding: 8px;
+      background-color: #DDDDDD;
+      border: 1px solid #DDDDDD;
+      border-radius: 10px;
+    }
+
+    footer {
+      width: 100%;
+      height: 40px;
+      padding: 25px;
+      background-color: #444444;
+      color: blanchedalmond;
+    }
+
+    footer .contents {
+      margin: auto;
+      text-align: center;
+    }
+
+    .detail {
+      font-size: 11px;
+      color: #999999;
+    }
+
+    a:link {
+      color: blue;
+    }
+
+    a:visited {
+      color: blue;
+    }
+
+    a:hover {
+      color: blue;
+    }
+
+    a:active {
+      color: blue;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:link {
+      color: white;
+    }
+
+    footer a:visited {
+      color: white;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <title>バイト数変換サービス</title>
+  <meta content="バイト数をいろいろな単位に変換します" name="description">
+  <style>
+    .flex {
+      padding: 2.5% 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+
+    .flex>* {
+      text-align: center;
+    }
+
+    .out input[type='text'] {
+      font: 15px/36px sans-serif;
+      width: 80%;
+      padding: 0.3em;
+      transition: 0.3s;
+      letter-spacing: 1px;
+      text-align: right;
+      border: none;
+    }
+
+    .col1 {
+      padding: 0 5px;
+      text-align: right;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .col2 {
+      padding: 0 5px;
+      text-align: left;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>バイト数変換サービス</h1>
+    <hr />
+  </header>
+  <div class="container">
+    <div>
+      <p>バイト数を
+        <a href="https://ja.wikipedia.org/wiki/%E3%83%93%E3%83%83%E3%83%88">ビット</a>、
+        <a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%AD%E3%83%90%E3%82%A4%E3%83%88">キロ</a>
+        （<a href="https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%93%E3%83%90%E3%82%A4%E3%83%88">キビ</a>）、
+        <a href="https://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%AC%E3%83%90%E3%82%A4%E3%83%88">メガ</a>
+        （<a href="https://ja.wikipedia.org/wiki/%E3%83%A1%E3%83%93%E3%83%90%E3%82%A4%E3%83%88">メビ</a>）、
+        <a href="https://ja.wikipedia.org/wiki/%E3%82%AE%E3%82%AC%E3%83%90%E3%82%A4%E3%83%88">ギガ</a>
+        （<a href="https://ja.wikipedia.org/wiki/%E3%82%AE%E3%83%93%E3%83%90%E3%82%A4%E3%83%88">ギビ</a>）、
+        <a href="https://ja.wikipedia.org/wiki/%E3%83%86%E3%83%A9%E3%83%90%E3%82%A4%E3%83%88">テラ</a>
+        （<a href="https://ja.wikipedia.org/wiki/%E3%83%86%E3%83%93%E3%83%90%E3%82%A4%E3%83%88">テビ</a>）
+        の単位に変換します。変換後の値を変更してそれぞれの単位の数値を求めることもできます。</P>
+      <div class="input_form">
+        <label class="ef" />
+        <input type="text" id="it" placeholder="バイト数を入力してください ex) 1024" />
+        <div class="flex">
+          <label>bit:<input type="radio" name="unit" value="bit" /></label>
+          <label>byte:<input type="radio" name="unit" value="byte" checked /></label>
+          <label>KB:<input type="radio" name="unit" value="kb" /></label>
+          <label>KiB:<input type="radio" name="unit" value="kib" /></label>
+          <label>MB:<input type="radio" name="unit" value="mb" /></label>
+          <label>MiB:<input type="radio" name="unit" value="mib" /></label>
+          <label>GB:<input type="radio" name="unit" value="gb" /></label>
+          <label>GiB:<input type="radio" name="unit" value="gib" /></label>
+          <label>TB:<input type="radio" name="unit" value="tb" /></label>
+          <label>TiB:<input type="radio" name="unit" value="tib" /></label>
+        </div>
+      </div>
+      <div class="out">
+        <h2>output</h2>
+        <table>
+          <tr>
+            <td class="col1"><input type="text" id="byte"></td>
+            <td class="col2">byte</td>
+            <td class="col1"><input type="text" id="bit"></td>
+            <td class="col2">bit</td>
+          </tr>
+          <tr>
+            <td class="col1"><input type="text" id="kb"></td>
+            <td class="col2">KB</td>
+            <td class="col1"><input type="text" id="kib"></td>
+            <td class="col2">KiB</td>
+          </tr>
+          <tr>
+            <td class="col1"><input type="text" id="mb"></td>
+            <td class="col2">MB</td>
+            <td class="col1"><input type="text" id="mib"></td>
+            <td class="col2">MiB</td>
+          </tr>
+          <tr>
+            <td class="col1"><input type="text" id="gb"></td>
+            <td class="col2">GB</td>
+            <td class="col1"><input type="text" id="gib"></td>
+            <td class="col2">GiB</td>
+          </tr>
+          <tr>
+            <td class="col1"><input type="text" id="tb"></td>
+            <td class="col2">TB</td>
+            <td class="col1"><input type="text" id="tib"></td>
+            <td class="col2">TiB</td>
+          </tr>
+        </table>
+        <p class="detail">※ 小数点第4位を四捨五入して表示しています</p>
+      </div>
+    </div>
+    <div class="out">
+      <h2>Reference</h2>
+      <table>
+        <tr>
+          <td class="col1">1</td>
+          <td class="col2">byte</td>
+          <td class="col1">8</td>
+          <td class="col2">bit</td>
+        </tr>
+        <tr>
+          <td class="col1">1</td>
+          <td class="col2">KB</td>
+          <td class="col1">0.977</td>
+          <td class="col2">KiB</td>
+        </tr>
+        <tr>
+          <td class="col1">1</td>
+          <td class="col2">MB</td>
+          <td class="col1">0.954</td>
+          <td class="col2">MiB</td>
+        </tr>
+        <tr>
+          <td class="col1">1</td>
+          <td class="col2">GB</td>
+          <td class="col1">0.931</td>
+          <td class="col2">GiB</td>
+        </tr>
+        <tr>
+          <td class="col1">1</td>
+          <td class="col2">TB</td>
+          <td class="col1">0.909</td>
+          <td class="col2">TiB</td>
+        </tr>
+      </table>
+      <p class="detail">※ KB,MBなどは10の乗数で表せられる数字(<a href="https://ja.wikipedia.org/wiki/SI%E6%8E%A5%E9%A0%AD%E8%BE%9E">SI接頭辞</a>)の単位、KiB,MiBなどはそれと区別するためにIEC(国際電気標準会議)が決めた2の乗数で表せられる数字(<a href="https://ja.wikipedia.org/wiki/2%E9%80%B2%E6%8E%A5%E9%A0%AD%E8%BE%9E">2進接頭辞</a>)の単位</p>
+    </div>
+  </div>
+  </div>
+  <footer>
+    <div class="contents">
+      powered by <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math"
+        target="_blank">Math</a>
+    </div>
+  </footer>
+  <script>
+    $(function () {
+      function show(val, unit) {
+        if (!val) return;
+        let size = val.replace(/,/g, '');
+        if (isNaN(size)) return;
+
+        if ($('#it').val()) {
+          $('#it').val(val);
+        }
+
+        var unit_size = 1;
+        switch (unit) {
+          case 'bit':
+            unit_size = 1 / 8;
+            break;
+          case 'kb':
+            unit_size = Math.pow(1000, 1);
+            break;
+          case 'kib':
+            unit_size = Math.pow(1024, 1);
+            break;
+          case 'mb':
+            unit_size = Math.pow(1000, 2);
+            break;
+          case 'mib':
+            unit_size = Math.pow(1024, 2);
+            break;
+          case 'gb':
+            unit_size = Math.pow(1000, 3);
+            break;
+          case 'gib':
+            unit_size = Math.pow(1024, 3);
+            break;
+          case 'tb':
+            unit_size = Math.pow(1000, 4);
+            break;
+          case 'tib':
+            unit_size = Math.pow(1024, 4);
+            break;
+        }
+
+        let byte = size * unit_size;
+
+        $('input[name="unit"]').val([unit]);
+        $('#byte').val(byte);
+        $('#bit').val(Math.round(byte * 8));
+        $('#kb').val(Math.round((byte / Math.pow(1000, 1)) * 1000) / 1000);
+        $('#kib').val(Math.round((byte / Math.pow(1024, 1)) * 1000) / 1000);
+        $('#mb').val(Math.round((byte / Math.pow(1000, 2)) * 1000) / 1000);
+        $('#mib').val(Math.round((byte / Math.pow(1024, 2)) * 1000) / 1000);
+        $('#gb').val(Math.round((byte / Math.pow(1000, 3)) * 1000) / 1000);
+        $('#gib').val(Math.round((byte / Math.pow(1024, 3)) * 1000) / 1000);
+        $('#tb').val(Math.round((byte / Math.pow(1000, 4)) * 1000) / 1000);
+        $('#tib').val(Math.round((byte / Math.pow(1024, 4)) * 1000) / 1000);
+      }
+
+      $('#it').change(function () {
+        console.log($('input[name="unit"]:checked').val());
+        show($(this).val(), $('unit').val());
+      });
+      $('input[name="unit"]').change(function () {
+        show($('#it').val(), $(this).val());
+      });
+      $('#bit').change(function () {
+        show($(this).val(), 'bit');
+      });
+      $('#byte').change(function () {
+        show($(this).val(), 'byte');
+      });
+      $('#kb').change(function () {
+        show($(this).val(), 'kb');
+      });
+      $('#kib').change(function () {
+        show($(this).val(), 'kib');
+      });
+      $('#mb').change(function () {
+        show($(this).val(), 'mb');
+      });
+      $('#mib').change(function () {
+        show($(this).val(), 'mib');
+      });
+      $('#gb').change(function () {
+        show($(this).val(), 'gb');
+      });
+      $('#gib').change(function () {
+        show($(this).val(), 'gib');
+      });
+      $('#tb').change(function () {
+        show($(this).val(), 'tb');
+      });
+      $('#tib').change(function () {
+        show($(this).val(), 'tib');
+      });
+    });
+  </script>
+</body>
+
+</html>

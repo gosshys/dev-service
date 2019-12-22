@@ -19,7 +19,7 @@ func main() {
 	router := gin.New()
 	router.Use(gin.Logger())
 	router.LoadHTMLGlob("templates/*.tmpl.html")
-	router.Static("/static", "static")
+	//router.Static("/static", "static")
 
 	router.GET("/byte", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "byte.tmpl.html", nil)

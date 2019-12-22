@@ -1,0 +1,275 @@
+<html>
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48562941-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-48562941-4');
+  </script>
+  <link rel="shortcut icon" href="./favicon.png">
+  <style>
+    header {
+      width: 60%;
+      margin: 0 auto;
+    }
+
+    .container {
+      width: 60%;
+      margin: 0 auto;
+    }
+
+    .input_form {
+      position: relative;
+      width: 70%;
+      margin: 30px auto;
+    }
+
+    .input_form input[type='text'] {
+      font: 15px/36px sans-serif;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0.3em;
+      transition: 0.3s;
+      letter-spacing: 1px;
+      color: #aaaaaa;
+      border: none;
+      border-bottom: 2px solid #1b2538;
+      background: transparent;
+    }
+
+    .ef input[type='text']:focus {
+      border-bottom: 2px solid #999999;
+      outline: none;
+    }
+
+    .out {
+      position: relative;
+      width: 70%;
+      margin: 20px auto;
+    }
+
+    .out input[type='text'] {
+      font: 15px/36px sans-serif;
+      width: 80%;
+      padding: 0.3em;
+      transition: 0.3s;
+      letter-spacing: 1px;
+      border: none;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    .col1 {
+      padding: 0 5px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .col2 {
+      padding: 0 5px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .col4 {
+      padding: 0 10px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .col5 {
+      padding: 0 10px;
+      border: none;
+      border-bottom: 2px solid #999999;
+    }
+
+    .cli {
+      position: relative;
+      width: 70%;
+      margin: 20px auto;
+    }
+
+    .cmd {
+      padding: 8px;
+      background-color: #DDDDDD;
+      border: 1px solid #DDDDDD;
+      border-radius: 10px;
+    }
+
+    footer {
+      width: 100%;
+      height: 40px;
+      padding: 25px;
+      background-color: #444444;
+      color: blanchedalmond;
+    }
+
+    footer .contents {
+      margin: auto;
+      text-align: center;
+    }
+
+    .detail {
+      font-size: 11px;
+      color: #999999;
+    }
+
+    a:link {
+      color: blue;
+    }
+
+    a:visited {
+      color: blue;
+    }
+
+    a:hover {
+      color: blue;
+    }
+
+    a:active {
+      color: blue;
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:link {
+      color: white;
+    }
+
+    footer a:visited {
+      color: white;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>unixtime変換サービス</title>
+    <meta content="UNIX時間と日本標準時を相互変換します" name="description">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script>
+  </head>
+<body>
+  <header>
+    <h1>unixtime変換サービス</h1>
+    <hr />
+  </header>
+  <div class="container">
+    <div>
+      <p>UNIX時間から日本標準時に変換します。日付形式の時間を入力してUNIX時間に変換することもできます。出力結果を変更して日付を求めることもできます。</P>
+      <div class="input_form">
+        <label class="ef">
+          <input type="text" id="it" placeholder="unixtimeかいずれかの日付形式の時間を入力してください ex) 1575891619">
+      </div>
+      <div class="out">
+        <h2>output</h2>
+        <table>
+          <tr>
+            <td class="col1">unixtime</td>
+            <td class="col2"><input type="text" id="ou"></td>
+          </tr>
+          <tr>
+            <td class="col1">ISO 8601</td>
+            <td class="col2"><input type="text" id="oj"></td>
+          </tr>
+          <tr>
+            <td class="col1">RFC 2822</td>
+            <td class="col2"><input type="text" id="or"></td>
+          </tr>
+        </table>
+        <h4>現在時刻との差</h4>
+        <table>
+          <tr>
+            <td class="col4"><input type="text" id="dh" style="text-align: right;">時間</td>
+            <td class="col4"><input type="text" id="dm" style="text-align: right;">分</td>
+            <td class="col4"><input type="text" id="ds" style="text-align: right;">秒</td>
+          </tr>
+        </table>
+        <p class="detail">※ 単位未満は切り捨てになっています。</p>
+      </div>
+      <div class="cli">
+        <h2>CLI</h2>
+        <p>macやlinuxのCLIでの変換方法はこちら</p>
+        <h3>unixtimeを求める</h3>
+        <h4>Mac & Linux</h4>
+        <div class="cmd">$ date +%s<br />1575948370</div>
+        <h3>unixtimeから日付形式に変換</h3>
+        <h4>Mac</h4>
+        <div class="cmd">$ date -r 1575948370<br />2019年 12月10日 火曜日 12時26分10秒 JST</div>
+        <h4>Linux</h4>
+        <div class="cmd">$ date -d @1575948370<br />2019年 12月10日 火曜日 12時26分10秒 JST</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="contents">
+      powered by <a href="https://momentjs.com/" target="_blank">moment.js</a>
+    </div>
+  </footer>
+  <script>
+    $(function () {
+      function show(val, now) {
+        if (!val) return;
+        var m = null;
+        if (val.length == 10) {
+          m = moment(val + "000", "x");
+        } else if (val.length == 13) {
+          m = moment(val, "x");
+        } else {
+          m = moment(val);
+        }
+        if (!m.isValid()) return;
+        if ($('#it').val()) {
+          $('#it').val(val);
+        }
+        $('#ou').val(m.unix());
+        $('#oj').val(m.format());
+        $('#or').val(m);
+
+        // diff
+        $('#dh').val(m.diff(now, 'hours'))
+        $('#dm').val(m.diff(now, 'minutes'))
+        $('#ds').val(m.diff(now, 'seconds'))
+      }
+
+      function diffChange(val, mode) {
+        var diff = moment();
+        var now = moment();
+        var num = Number(val);
+        var adj = 0;
+        if (num > 0) adj = 1;
+        show(String(diff.add(num, mode).unix()+adj), now);
+      }
+
+      show(moment().unix().toString());
+
+      $('#it').change(function () {
+        show($(this).val(), moment());
+      });
+      $('#ou').change(function () {
+        show($(this).val(), moment());
+      });
+      $('#oj').change(function () {
+        show($(this).val(), moment());
+      });
+      $('#or').change(function () {
+        show($(this).val(), moment());
+      });
+      $('#dh').change(function () {
+        diffChange($(this).val(), 'hours')
+      });
+      $('#dm').change(function () {
+        diffChange($(this).val(), 'minutes')
+      });
+      $('#ds').change(function () {
+        diffChange($(this).val(), 'seconds')
+      });
+    });
+  </script>
+</body>
+
+</html>
